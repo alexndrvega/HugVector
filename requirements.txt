@@ -1,0 +1,5 @@
+numpy
+faiss
+nltk
+gensim
+tensorflow
