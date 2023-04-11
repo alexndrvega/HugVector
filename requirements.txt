@@ -1,5 +1,5 @@
 numpy
-faiss
+faiss-cpu
 nltk
 gensim
 tensorflow
