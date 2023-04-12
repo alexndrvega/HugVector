@@ -1,3 +1,4 @@
+# src/hug_db.py
 # HugDB
 import faiss
 import numpy as np
