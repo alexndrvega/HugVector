@@ -28,18 +28,15 @@ def text_to_hugvector(tokens, model):
 # hugprocess_img
 def hugprocess_img(image_path, resize_dim=(224, 224), normalize=True, augment=False):
     img = Image.open(image_path)
-
     img = img.resize(resize_dim, Image.ANTIALIAS)
 
     if augment:
         img = ImageOps.mirror(img) if np.random.rand() > 0.5 else img
         rotation_angle =  np.random.uniform(-20, 20)
         img = img.rotate(rotation_angle)
-    
     img_array = np.array(img)
 
     if normalize:
         img_array = img_array / 255.0
-    
     return img_array
 
