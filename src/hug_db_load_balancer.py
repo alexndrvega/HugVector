@@ -8,7 +8,7 @@ class HugDBLoadBalancer:
         self.hugdb_replicas = hugdb_replicas
         self.replica_cycle = itertools.cycle(hugdb_replicas)
     
-    def search(self, query_vector: List[float], k: init = 5, metadata_filter: Dict[str, Any] = None) -> Tuple[List[float], List[List[float]]]:
+    def search(self, query_vector: List[float], k: int = 5, metadata_filter: Dict[str, Any] = None) -> Tuple[List[float], List[List[float]]]:
         selected_replica = next(self.replica_cycle)
         distances, results = selected_replica.search(query_vector, k, metadata_filter)
         return distances, results
