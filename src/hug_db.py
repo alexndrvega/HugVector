@@ -11,7 +11,9 @@ class HugItem:
         self.encrypted_vector = encrypted_vector
 
 class HugDB:
-    def __init__(self, encryption_key, nlist=100, nprobe=10, num_shards=1, M=16, nbits=8, index_filename=None):
+    def __init__(self, encryption_key=None, nlist=100, nprobe=10, num_shards=1, M=16, nbits=8, index_filename=None):
+        if encryption_key is None:
+            encryption_key = Fernet.generate_key()
         self.encryption = Fernet(encryption_key)
         self.nlist = nlist
         self.nprobe = nprobe
