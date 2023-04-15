@@ -51,8 +51,14 @@ expanded_metadata = metadata_list * 10
 for replica in hug_db_replicas:
     replica.build_index((vectors * 10)[:-1], metadata_list)
 
-query_vector = vectors[-1][1]
+query_vector = vectors[-1]
 metada_filter = lambda metadata: metadata["category"] == "A" and metadata["length"] == "short"
+
+print("Query vector before re-shape:", query_vector)
+query_vector = query_vector.reshape(1, -1)
+print("Query vector shape after reshape:", query_vector.shape)
+
+print("Indexed vectors dimension:", hug_db_replicas[0].index.d)
 distances, results = hug_db_replicas[0].search(query_vector.reshape(1, -1), k=2, metadata_filter=metada_filter)
 
 print("Search results:", results)
