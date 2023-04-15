@@ -36,7 +36,7 @@ class HugDB:
         index = faiss.IndexIVFPQ(quantizer, data_vectors.shape[1], self.nlist, self.M, self.nbits)
         index.train(data_vectors)
 
-        self.index = faiss.IndexShards(data_vectors.shape[1], self.num_shards)
+        self.index = faiss.IndexShards(data_vectors.shape[1])
 
         for i, (vector, metadata) in enumerate(zip(data_vectors, metadata_list)):
             self.add_item(str(i), vector, metadata)
