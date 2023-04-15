@@ -43,7 +43,7 @@ metadata_list = [
     {"category": "C", "length": "short"}
 ] * 10
 
-hug_db_replicas = [HugDB(encryption_key=None, nlist=1, M=6) for _ in range(3)]
+hug_db_replicas = [HugDB(encryption_key=None, nlist=1, M=6, num_shards=1) for _ in range(3)]
 
 expanded_vector = vectors * 10
 expanded_metadata = metadata_list * 10
@@ -53,6 +53,6 @@ for replica in hug_db_replicas:
 
 query_vector = vectors[-1][1]
 metada_filter = lambda metadata: metadata["category"] == "A" and metadata["length"] == "short"
-distances, results = hug_db_replicas[0].search(query_vector, k=2, metadata_filter=metada_filter)
+distances, results = hug_db_replicas[0].search(query_vector.reshape(1, -1), k=2, metadata_filter=metada_filter)
 
 print("Search results:", results)
